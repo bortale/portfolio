@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study — Translation Agency L&D Transformation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --bg2: #f3efe8;
+    --surface: #eee9df;
+    --text: #2c2825;
+    --text-mid: #3a3530;
+    --muted: #6b6058;
+    --accent: #b85c38;
+    --accent-light: #f0e4dc;
+    --accent2: #7a8c6e;
+    --border: #ddd8cf;
+    --white: #fffefb;
+    --success: #2d6a4f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 56px;
+    background: rgba(250,248,244,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-back:hover { color: var(--accent); }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--text);
+    padding: 72px 56px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 1px solid rgba(250,248,244,0.06);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: 30%;
+    width: 250px; height: 250px;
+    border-radius: 50%;
+    border: 1px solid rgba(250,248,244,0.04);
+  }
+
+  .hero-inner { max-width: 780px; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+  }
+
+  .hero-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--bg);
+    margin-bottom: 36px;
+  }
+
+  .hero h1 em { font-style: italic; color: #c8a882; }
+
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding-top: 32px;
+    border-top: 1px solid rgba(250,248,244,0.1);
+  }
+
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(250,248,244,0.35);
+    margin-bottom: 4px;
+  }
+
+  .meta-value { font-size: 13px; color: rgba(250,248,244,0.75); font-weight: 500; }
+
+  /* LAYOUT */
+  .container { max-width: 780px; margin: 0 auto; padding: 0 56px; }
+
+  section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after { content: ''; height: 1px; width: 32px; background: var(--accent); opacity: 0.4; }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  h2 em { font-style: italic; color: var(--accent); }
+
+  h3 { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+
+  p { color: var(--text-mid); margin-bottom: 14px; font-size: 15px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* CALLOUT */
+  .callout {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    border-radius: 0 4px 4px 0;
+    margin: 28px 0;
+  }
+
+  .callout p { color: var(--text); font-weight: 500; margin: 0; font-size: 15px; }
+
+  /* METRICS */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2px;
+    margin: 32px 0;
+  }
+
+  .metric-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 24px;
+  }
+
+  .metric-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .metric-label { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+  /* TABLE */
+  .revenue-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+
+  .revenue-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .revenue-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); color: var(--text-mid); }
+
+  .revenue-table tr:last-child td {
+    background: var(--bg2);
+    font-weight: 600;
+    color: var(--text);
+    border-bottom: none;
+  }
+
+  .revenue-table tr:last-child td:last-child { color: var(--success); }
+
+  /* STEPS */
+  .step { display: grid; grid-template-columns: 36px 1fr; gap: 20px; padding: 22px 0; border-bottom: 1px solid var(--border); }
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    width: 28px; height: 28px;
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  /* BEFORE/AFTER */
+  .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin: 24px 0; }
+
+  .ba-card { padding: 24px; font-size: 14px; border: 1px solid var(--border); }
+  .ba-card.before { background: #faf0ec; }
+  .ba-card.after { background: #f0f5f1; }
+
+  .ba-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .ba-card.before .ba-title { color: var(--accent); }
+  .ba-card.after .ba-title { color: var(--success); }
+
+  .ba-card ul { padding-left: 16px; color: var(--text-mid); }
+  .ba-card li { margin-bottom: 6px; line-height: 1.5; }
+
+  /* INSIGHT */
+  .insight-box {
+    background: var(--text);
+    color: var(--bg);
+    padding: 36px;
+    margin: 32px 0;
+  }
+
+  .insight-box p {
+    color: rgba(250,248,244,0.8);
+    font-size: 17px;
+    line-height: 1.7;
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .insight-box strong { color: #c8a882; font-style: normal; }
+
+  /* FOOTER */
+  .page-footer {
+    background: var(--text);
+    padding: 32px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .page-footer p { font-size: 12px; color: rgba(250,248,244,0.3); }
+
+  .footer-back {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 600px) {
+    nav, .hero { padding-left: 24px; padding-right: 24px; }
+    .container { padding: 0 24px; }
+    .before-after { grid-template-columns: 1fr; }
+    .hero-meta { gap: 20px; }
+    .page-footer { padding: 24px; flex-direction: column; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-back">← Back to portfolio</a>
+  <a href="index.html" class="nav-logo">Alexandra Bortnikova</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">L&D Case Study</div>
+    <h1>From Chaos to Capability:<br><em>Learning-Driven Performance Transformation</em></h1>
+    <div class="hero-meta">
+      <div>
+        <div class="meta-label">Role</div>
+        <div class="meta-value">L&D System Designer & Performance Lead</div>
+      </div>
+      <div>
+        <div class="meta-label">Industry</div>
+        <div class="meta-value">Translation / Language Services</div>
+      </div>
+      <div>
+        <div class="meta-label">Scope</div>
+        <div class="meta-value">End-to-end L&D system</div>
+      </div>
+      <div>
+        <div class="meta-label">Key outcome</div>
+        <div class="meta-value">5× revenue growth</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- MY ROLE -->
+  <section>
+    <div class="section-label">Context</div>
+    <h2>My Role</h2>
+    <p>I identified a critical performance gap that could not be solved through hiring or volume alone. As the person responsible for the agency's operations and outcomes, I designed and implemented the entire learning and performance system from scratch — needs analysis, onboarding architecture, competency mapping, continuous learning infrastructure, and a peer mentoring pipeline.</p>
+    <p>This project clarified something I had intuited for years: <strong>performance problems are almost always system design problems</strong> — and L&D is the lever that makes everything else work.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;">
+      <span style="background:var(--bg2);border:1px solid var(--border);padding:5px 14px;border-radius:100px;font-size:12px;color:var(--text-mid);">Needs Analysis</span>
+      <span style="background:var(--bg2);border:1px solid var(--border);padding:5px 14px;border-radius:100px;font-size:12px;color:var(--text-mid);">Instructional Design</span>
+      <span style="background:var(--bg2);border:1px solid var(--border);padding:5px 14px;border-radius:100px;font-size:12px;color:var(--text-mid);">Onboarding Architecture</span>
+      <span style="background:var(--bg2);border:1px solid var(--border);padding:5px 14px;border-radius:100px;font-size:12px;color:var(--text-mid);">Competency Mapping</span>
+      <span style="background:var(--bg2);border:1px solid var(--border);padding:5px 14px;border-radius:100px;font-size:12px;color:var(--text-mid);">Learning Loop Design</span>
+      <span style="background:var(--bg2);border:1px solid var(--border);padding:5px 14px;border-radius:100px;font-size:12px;color:var(--text-mid);">Peer Mentoring Pipeline</span>
+      <span style="background:var(--bg2);border:1px solid var(--border);padding:5px 14px;border-radius:100px;font-size:12px;color:var(--text-mid);">Performance Consulting</span>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section>
+    <div class="section-label">01 — Problem</div>
+    <h2>The business was growing. <em>Performance wasn't.</em></h2>
+    <p>The agency had no structured onboarding or learning system. Translators at any level were accepted, quality standards were undefined, and learning happened through trial and error — with managers absorbing the cost of every gap.</p>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-number">2–3mo</div>
+        <div class="metric-label">Unpredictable onboarding time</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-number">~80%</div>
+        <div class="metric-label">Tasks requiring rework</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-number">~14%</div>
+        <div class="metric-label">Retention after 6 months</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-number">Flat</div>
+        <div class="metric-label">Revenue despite growing workload</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAILURE -->
+  <section>
+    <div class="section-label">02 — Initial Failure & Insight</div>
+    <h2>Training alone <em>didn't work</em></h2>
+    <p>The first intervention — adding more training — failed. Quality issues persisted, the team became overwhelmed, and workload increased without any improvement in output.</p>
+
+    <div class="callout">
+      <p>💡 Key insight: Training without system design does not improve performance. The root cause was not a knowledge gap — it was the absence of entry filtering, structured onboarding, capability alignment, and a defined learning pathway.</p>
+    </div>
+
+    <p>This failure reframed the question. Instead of asking "what do people need to learn?" I started asking <strong>"what system needs to exist for people to perform?"</strong></p>
+  </section>
+
+  <!-- SOLUTION -->
+  <section>
+    <div class="section-label">03 — Solution</div>
+    <h2>A five-component <em>capability system</em></h2>
+    <p>I designed and implemented a learning and performance system that integrated hiring, onboarding, workflow, and culture into a single coherent structure.</p>
+
+    <div style="margin-top:28px;">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h3>Entry Filtering & Assessment</h3>
+          <p>Theoretical interview + written translation test. Only candidates with baseline capability entered the system — eliminating downstream rework before it started.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h3>Structured 3-Week Onboarding</h3>
+          <p><strong>Weeks 1–2:</strong> Guided learning — onboarding framework, 10-minute micro-tests (grammar, phrasing, decision-making), simple tasks, assigned mentor.<br>
+          <strong>Week 3:</strong> Controlled autonomy — self-selected assignments, increasing complexity, deadline responsibility, structured feedback.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h3>Competency Mapping</h3>
+          <p>Translator level defined within 2 weeks. Specialisation identified across three tracks: business/analytical, crypto & market, literary/creative. Enabled task–capability alignment and eliminated "taking tasks beyond skill level."</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h3>Embedded Continuous Learning</h3>
+          <p>Bi-monthly expert sessions, weekly roundtables for error analysis and best practices, ongoing micro-testing. Learning embedded in workflow — not separate from it.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div>
+          <h3>Peer Learning & Growth Pipeline</h3>
+          <p>Mentor–mentee pairs, responsibility for knowledge transfer, high performers growing into mentor → manager roles. Result: 2 internal managers promoted from within the system.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section>
+    <div class="section-label">04 — Results</div>
+    <h2>Measurable impact <em>across every dimension</em></h2>
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-number">3 wks</div>
+        <div class="metric-label">Onboarding (was 2–3 months)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-number">~30%</div>
+        <div class="metric-label">Rework rate (was ~80%)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-number">~35%</div>
+        <div class="metric-label">Retention after 6 months (was 14%)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-number">28%</div>
+        <div class="metric-label">Faster delivery speed</div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:32px;margin-bottom:16px;">Revenue Impact</h3>
+    <table class="revenue-table">
+      <thead>
+        <tr><th>Phase</th><th>Orders</th><th>Avg. Price</th><th>Revenue</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Initial</td><td>110</td><td>$28</td><td>$3,080</td></tr>
+        <tr><td>Crisis (pre-system)</td><td>164</td><td>$18</td><td>$2,952</td></tr>
+        <tr><td>After system</td><td>140</td><td>$43</td><td>$6,020</td></tr>
+        <tr><td>Mature stage</td><td>240</td><td>$68</td><td>$16,320 — 5× growth</td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:12px;font-size:13px;color:var(--muted);">Revenue grew 5× from initial baseline ($3,080 → $16,320) — driven not by volume alone, but by capability enabling higher-value services at higher prices.</p>
+
+    <div class="before-after" style="margin-top:32px;">
+      <div class="ba-card before">
+        <div class="ba-title">Before</div>
+        <ul>
+          <li>Simple, inconsistent output</li>
+          <li>High error and rework rate</li>
+          <li>Took tasks beyond capability</li>
+          <li>Relied on guesswork</li>
+          <li>Dependent on manager decisions</li>
+        </ul>
+      </div>
+      <div class="ba-card after">
+        <div class="ba-title">After</div>
+        <ul>
+          <li>Business, crypto & literary work</li>
+          <li>Low, stable rework rate</li>
+          <li>Tasks matched to skill level</li>
+          <li>Used peer support structures</li>
+          <li>Took ownership of quality</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFLECTION -->
+  <section>
+    <div class="section-label">05 — Reflection</div>
+    <h2>What I learned — and <em>what I'd do differently</em></h2>
+
+    <div class="insight-box">
+      <p>"Performance problems are rarely caused by lack of effort. They're caused by the absence of structured learning, capability alignment, and workflow design. Once the system existed, behaviour changed — not because people were told to change, but because <strong>the environment made the right behaviour the default.</strong>"</p>
+    </div>
+
+    <p>If I were to replicate this system in a new organisation tomorrow, I would start with the same diagnostic sequence: map the gap between task demands and current capability, define the minimum viable entry bar, build a short structured onboarding with embedded checkpoints, then layer in continuous learning and peer support.</p>
+
+    <p>What I would do differently: involve senior team members earlier in the design process to reduce initial resistance, and define success metrics before launch rather than measuring retrospectively.</p>
+  </section>
+
+  <!-- HOW I THINK -->
+  <section>
+    <div class="section-label">06 — Decision-Making</div>
+    <h2>How I think <em>as an L&D designer</em></h2>
+
+    <div style="margin-top:8px;">
+      <div class="step">
+        <div class="step-num" style="background:var(--accent);">→</div>
+        <div>
+          <h3>I start with symptoms, not assumptions</h3>
+          <p>Rework, slow onboarding, manager overload — these are signals, not the problem. I resist jumping to solutions before understanding what's actually breaking.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--accent);">→</div>
+        <div>
+          <h3>I test hypotheses before scaling</h3>
+          <p>The first intervention failed. I treated that as data, not defeat — and redesigned from the root cause upward.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--accent);">→</div>
+        <div>
+          <h3>I observe behaviour, not just knowledge</h3>
+          <p>The question wasn't "do they know it?" — it was "how do they choose tasks, manage deadlines, and ask for help when they're stuck?"</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--accent);">→</div>
+        <div>
+          <h3>I embed learning into the work itself</h3>
+          <p>Micro-tests, peer feedback, and error analysis became part of the weekly workflow — not separate events people attend and forget.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--accent);">→</div>
+        <div>
+          <h3>I use culture as a reinforcement layer</h3>
+          <p>Recognition, visible progress, and mentorship roles converted resistant senior staff into active knowledge sharers — because the system gave them a meaningful role.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="page-footer">
+  <p>Alexandra Bortnikova — L&D Portfolio</p>
+  <a href="index.html" class="footer-back">← Back to portfolio</a>
+</div>
+
+</body>
+</html>
